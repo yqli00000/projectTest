@@ -4,14 +4,14 @@ public class teacher {
     private String TID;
     private String name;
     private Integer gender;
-    private Integer telephone;
+    private Long telephone;
     private String email;
     private String code;
 
     public teacher() {
     }
 
-    public teacher(String TID, String name, Integer gender, Integer telephone, String email, String code) {
+    public teacher(String TID, String name, Integer gender, Long telephone, String email, String code) {
         this.TID = TID;
         this.name = name;
         this.gender = gender;
@@ -32,7 +32,7 @@ public class teacher {
         return gender;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
@@ -56,7 +56,7 @@ public class teacher {
         this.gender = gender;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 

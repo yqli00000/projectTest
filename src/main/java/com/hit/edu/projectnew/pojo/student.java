@@ -4,14 +4,14 @@ public class student {
     private String SID;
     private String name;
     private Integer gender;
-    private Integer telephone;
+    private Long telephone;
     private String email;
     private String code;
 
     public student() {
     }
 
-    public student(String SID, String name, Integer gender, Integer telephone, String email, String code) {
+    public student(String SID, String name, Integer gender, Long telephone, String email, String code) {
         this.SID = SID;
         this.name = name;
         this.gender = gender;
@@ -44,11 +44,11 @@ public class student {
         this.gender = gender;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 

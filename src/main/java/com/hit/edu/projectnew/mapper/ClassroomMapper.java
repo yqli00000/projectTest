@@ -11,4 +11,7 @@ public interface ClassroomMapper {
 //    查询全部内容
     @Select("select * from classroom")
     public List<classroom> list();
+
+    @Select("select * from classsroom where CID=")
+    public List<classroom> list(String CID);
 }
