@@ -91,36 +91,73 @@ public class ClassroomController {
 //
 //    }
     // 更新classroom信息的方法
-    @RequestMapping("/classroomUpdate")
-    @PostMapping
+//    @RequestMapping("/classroomUpdate")
+//    @PostMapping
+//    public Map<String, Object> updateClassroom(@RequestBody Map<String, String> classroomInfo) {
+//        Map<String, Object> response = new HashMap<>();
+//        Integer CID = Integer.parseInt(classroomInfo.get("CID"));
+//        Integer content = Integer.parseInt(classroomInfo.get("content"));
+//        String building = classroomInfo.get("building");
+//        Integer campus = Integer.parseInt(classroomInfo.get("campus"));
+//        String equipment = classroomInfo.get("equipment");
+//
+//        classroom classroom = new classroom();
+//        classroom.setCID(CID);
+//        classroom.setContent(content);
+//        classroom.setBuilding(building);
+//        classroom.setCampus(campus);
+//        classroom.setEquipment(equipment);
+//
+//        boolean exists = classroomService.checkClassroomExists(CID);
+//        if (!exists) {
+//            response.put("success", false);
+//            response.put("message", "Classroom with CID " + CID + " does not exist.");
+//            return response;
+//        }
+//
+//        try {
+//            classroomService.updataClassroom(classroom);
+//            response.put("success", true);
+//            response.put("message", "Classroom updated successfully.");
+//        } catch (Exception e) {
+//            response.put("success", false);
+//            response.put("message", "Failed to update classroom.");
+//        }
+//
+//        return response;
+//    }
+    @PostMapping("/classroomUpdate")
     public Map<String, Object> updateClassroom(@RequestBody Map<String, String> classroomInfo) {
         Map<String, Object> response = new HashMap<>();
-        Integer CID = Integer.parseInt(classroomInfo.get("CID"));
-        Integer content = Integer.parseInt(classroomInfo.get("content"));
-        String building = classroomInfo.get("building");
-        Integer campus = Integer.parseInt(classroomInfo.get("campus"));
-        String equipment = classroomInfo.get("equipment");
-        classroom classroom = new classroom();
-        classroom.setCID(CID);
-        classroom.setContent(content);
-        classroom.setBuilding(building);
-        classroom.setCampus(campus);
-        classroom.setEquipment(equipment);
 
-        boolean exists = classroomService.checkClassroomExists(CID);
-        if (!exists) {
+        Integer CID = Integer.parseInt(classroomInfo.get("CID"));
+        classroom existingClassroom = classroomService.findClassroomById(CID);
+        if (existingClassroom == null) {
             response.put("success", false);
             response.put("message", "Classroom with CID " + CID + " does not exist.");
             return response;
         }
 
         try {
-            classroomService.updataClassroom(classroom);
+            if (classroomInfo.containsKey("content") && classroomInfo.get("content")!="") {
+                existingClassroom.setContent(Integer.parseInt(classroomInfo.get("content")));
+            }
+            if (classroomInfo.containsKey("building") && classroomInfo.get("building")!="") {
+                existingClassroom.setBuilding(classroomInfo.get("building"));
+            }
+            if (classroomInfo.containsKey("campus") && classroomInfo.get("campus")!="") {
+                existingClassroom.setCampus(Integer.parseInt(classroomInfo.get("campus")));
+            }
+            if (classroomInfo.containsKey("equipment") && classroomInfo.get("equipment")!="") {
+                existingClassroom.setEquipment(classroomInfo.get("equipment"));
+            }
+
+            classroomService.updateClassroom(existingClassroom);
             response.put("success", true);
             response.put("message", "Classroom updated successfully.");
         } catch (Exception e) {
             response.put("success", false);
-            response.put("message", "Failed to update classroom.");
+            response.put("message", "Failed to update classroom: " + e.getMessage());
         }
 
         return response;

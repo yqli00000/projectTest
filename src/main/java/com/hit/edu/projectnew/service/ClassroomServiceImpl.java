@@ -30,7 +30,7 @@ public class ClassroomServiceImpl implements ClassroomService {
 //    public void updateClassroomStatus(int CID, boolean newStatus) {
 //        classroomMapper.updateClassroomStatus(CID, newStatus);
 //    }
-    public void updataClassroom(classroom classroom){
+    public void updateClassroom(classroom classroom){
         classroomMapper.updateClassroom(classroom);
     }
     // 检查数据库中是否存在指定 CID 的教室记录

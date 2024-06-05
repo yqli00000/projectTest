@@ -20,4 +20,6 @@ public interface ClassroomService {
 
     public boolean checkClassroomExists(Integer CID);
     public List<classroom> findClassroomsByConditions(Map<String, Object> conditions);
+
+    public classroom findClassroomById(Integer CID);
 }

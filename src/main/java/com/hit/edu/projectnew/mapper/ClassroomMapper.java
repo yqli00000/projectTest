@@ -28,20 +28,42 @@ public interface ClassroomMapper {
 
 //    @Update("UPDATE classroom SET status = #{newStatus} WHERE CID = #{CID}")
 //    void updateClassroomStatus(@Param("CID") int CID, @Param("newStatus") boolean newStatus);
-    @Update("UPDATE classroom SET content = #{content}, building = #{building}, campus = #{campus}, equipment = #{equipment} WHERE CID = #{CID}")
-//    @Update({
-//            "<script>",
-//            "UPDATE classroom",
-//            "<set>",
-//            "<if test='content != null'>content = #{content},</if>",
-//            "<if test='building != null'>building = #{building},</if>",
-//            "<if test='campus != null'>campus = #{campus},</if>",
-//            "<if test='equipment != null'>equipment = #{equipment},</if>",
-//            "</set>",
-//            "WHERE CID = #{CID}",
-//            "</script>"
-//    })
-    void updateClassroom(classroom classroom);
+//    @Update("UPDATE classroom SET content = #{content}, building = #{building}, campus = #{campus}, equipment = #{equipment} WHERE CID = #{CID}")
+////    @Update({
+////            "<script>",
+////            "UPDATE classroom",
+////            "<set>",
+////            "<if test='content != null'>content = #{content},</if>",
+////            "<if test='building != null'>building = #{building},</if>",
+////            "<if test='campus != null'>campus = #{campus},</if>",
+////            "<if test='equipment != null'>equipment = #{equipment},</if>",
+////            "</set>",
+////            "WHERE CID = #{CID}",
+////            "</script>"
+////    })
+//    void updateClassroom(classroom classroom);
+    @UpdateProvider(type = ClassroomSqlBuilder.class, method = "buildUpdateClassroom")
+    void updateClassroom(@Param("classroom") classroom classroom);
+    class ClassroomSqlBuilder {
+        public String buildUpdateClassroom(final classroom classroom) {
+            return new SQL() {{
+                UPDATE("classroom");
+                if (classroom.getContent() != null ) {
+                    SET("content = #{classroom.content}");
+                }
+                if (classroom.getBuilding() != null) {
+                    SET("building = #{classroom.building}");
+                }
+                if (classroom.getCampus() != null) {
+                    SET("campus = #{classroom.campus}");
+                }
+                if (classroom.getEquipment() != null) {
+                    SET("equipment = #{classroom.equipment}");
+                }
+                WHERE("CID = #{classroom.CID}");
+            }}.toString();
+        }
+    }
     @SelectProvider(type = ClassroomSqlProvider.class, method = "selectByConditions")
     List<classroom> selectByConditions(Map<String, Object> conditions);
 
