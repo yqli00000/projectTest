@@ -162,43 +162,19 @@ public class ClassroomController {
 
         return response;
     }
-//    public Map<String, Object> updateClassroom(@PathVariable int CID, @RequestBody Map<String, Object> updateInfo) {
-//        Map<String, Object> response = new HashMap<>();
-//
-//        // 检查是否存在指定 CID 的教室记录
-//        boolean exists = classroomService.checkClassroomExists(CID);
-//        if (!exists) {
-//            response.put("success", false);
-//            response.put("message", "Classroom with CID " + CID + " does not exist.");
-//            return response;
-//        }
-//
-//        // 从请求体中获取需要更新的字段值
-//        Integer content = updateInfo.containsKey("content") ? (Integer) updateInfo.get("content") : null;
-//        String building = updateInfo.containsKey("building") ? (String) updateInfo.get("building") : null;
-//        Integer campus = updateInfo.containsKey("campus") ? (Integer) updateInfo.get("campus") : null;
-//        String equipment = updateInfo.containsKey("equipment") ? (String) updateInfo.get("equipment") : null;
-//
-//        // 构造需要更新的 classroom 对象
-//        classroom classroom = new classroom();
-//        classroom.setCID(CID);
-//        classroom.setContent(content);
-//        classroom.setBuilding(building);
-//        classroom.setCampus(campus);
-//        classroom.setEquipment(equipment);
-//
-//        try {
-//            // 执行部分更新操作
-//            classroomService.updataClassroom(classroom);
-//            response.put("success", true);
-//            response.put("message", "Classroom updated successfully.");
-//        } catch (Exception e) {
-//            response.put("success", false);
-//            response.put("message", "Failed to update classroom.");
-//        }
-//
-//        return response;
-//    }
 
+    @GetMapping("/classroomSelect")
+    public Map<String, Object> findClassrooms(@RequestParam Map<String, Object> classroomInfo) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<classroom> classrooms = classroomService.findClassroomsByConditions(classroomInfo);
+            response.put("success", true);
+            response.put("classrooms", classrooms);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Failed to find classrooms: " + e.getMessage());
+        }
+        return response;
+    }
 
 }

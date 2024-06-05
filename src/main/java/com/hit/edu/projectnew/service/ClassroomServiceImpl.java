@@ -6,7 +6,6 @@ import com.hit.edu.projectnew.mapper.ClassroomMapper;
 import com.hit.edu.projectnew.pojo.reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +38,12 @@ public class ClassroomServiceImpl implements ClassroomService {
         classroom classroom = classroomMapper.findClassroomById(CID);
         // 如果查询结果不为空，则表示数据库中存在指定 CID 的记录
         return classroom != null;
+    }
+    public List<classroom> findClassroomsByConditions(Map<String, Object> conditions) {
+        return classroomMapper.selectByConditions(conditions);
+    }
+    @Override
+    public classroom findClassroomById(Integer CID) {
+        return classroomMapper.findClassroomById(CID);
     }
 }

@@ -16,7 +16,8 @@ public interface ClassroomService {
     public void deleteClassroom(Integer CID);
 
 //    public void updateClassroomStatus(int CID, boolean newStatus);
-    public void updataClassroom(classroom classroom);
+    public void updateClassroom(classroom classroom);
+
 
     public boolean checkClassroomExists(Integer CID);
     public List<classroom> findClassroomsByConditions(Map<String, Object> conditions);
