@@ -1,9 +1,12 @@
 package com.hit.edu.projectnew.mapper;
 
 import com.hit.edu.projectnew.pojo.classroom;
+import com.hit.edu.projectnew.pojo.reservation;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ClassroomMapper {
@@ -39,4 +42,28 @@ public interface ClassroomMapper {
 //            "</script>"
 //    })
     void updateClassroom(classroom classroom);
+    @SelectProvider(type = ClassroomSqlProvider.class, method = "selectByConditions")
+    List<classroom> selectByConditions(Map<String, Object> conditions);
+
+    class ClassroomSqlProvider {
+        public String selectByConditions(Map<String, Object> conditions) {
+            return new SQL() {{
+                SELECT("*");
+                FROM("classroom");
+                if (conditions.get("CID") != null) {
+                    WHERE("CID = #{CID}");
+                }
+                if (conditions.get("content") != null) {
+                    WHERE("content = #{content}");
+                }
+                if (conditions.get("building") != null) {
+                    WHERE("building = #{building}");
+                }
+                if (conditions.get("campus") != null) {
+                    WHERE("campus = #{campus}");
+                }
+            }}.toString();
+        }
+    }
+
 }

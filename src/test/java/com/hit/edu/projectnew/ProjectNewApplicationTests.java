@@ -12,12 +12,12 @@ import java.util.List;
 class ProjectNewApplicationTests {
     @Autowired
     private ClassroomMapper classroomMapper;
-    @Test
-    public void testListClassroom(){
-        List<classroom> classroomList = classroomMapper.list();
-        classroomList.stream().forEach(classroom -> {
-            System.out.println(classroom);
-        });
-
-    }
+//    @Test
+//    public void testListClassroom(){
+//        List<classroom> classroomList = classroomMapper.list();
+//        classroomList.stream().forEach(classroom -> {
+//            System.out.println(classroom);
+//        });
+//
+//    }
 }

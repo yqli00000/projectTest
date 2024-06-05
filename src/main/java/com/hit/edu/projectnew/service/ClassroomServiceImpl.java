@@ -1,11 +1,14 @@
 package com.hit.edu.projectnew.service;
 
+import com.hit.edu.projectnew.mapper.ReservationMapper;
 import com.hit.edu.projectnew.pojo.classroom;
 import com.hit.edu.projectnew.mapper.ClassroomMapper;
+import com.hit.edu.projectnew.pojo.reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ClassroomServiceImpl implements ClassroomService {

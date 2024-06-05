@@ -1,6 +1,7 @@
 package com.hit.edu.projectnew.controller;
 
 import com.hit.edu.projectnew.pojo.classroom;
+import com.hit.edu.projectnew.pojo.reservation;
 import com.hit.edu.projectnew.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
