@@ -1,8 +1,7 @@
 package com.hit.edu.projectnew.mapper;
 
 import com.hit.edu.projectnew.pojo.classroom;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,10 +12,13 @@ public interface ClassroomMapper {
 //    public List<classroom> list();
 
 
-//    @Select("SELECT * FROM classroom")
-//    List<classroom> findAllClassrooms();
-//
-//    @Insert("INSERT INTO classroom (name, capacity) VALUES (#{name}, #{capacity})")
-//    @Options(useGeneratedKeys = true, keyProperty = "cid")
-//    void addClassroom(classroom classroom);
+    @Select("SELECT * FROM classroom")
+    List<classroom> findAllClassrooms();
+
+    @Insert("INSERT INTO classroom (CID, content, building, campus, equipment) VALUES (#{CID}, #{content}, #{building}, #{campus}, #{equipment})")
+//    @Options(useGeneratedKeys = true, keyProperty = "CID")
+    void addClassroom(classroom classroom);
+
+    @Delete("DELETE FROM classroom WHERE CID = #{CID}")
+    void deleteClassroom(int CID);
 }
