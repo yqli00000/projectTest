@@ -9,15 +9,18 @@ public class reservation {
     private String reservations;
     private String reason;
 
+    private Integer type;
     public reservation() {
     }
 
-    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason) {
+
+    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type) {
         this.CID = CID;
         this.occuStatus = occuStatus;
         this.occuTime = occuTime;
         this.reservations = reservations;
         this.reason = reason;
+        this.type = type;
     }
 
     public Integer getCID() {
@@ -60,6 +63,13 @@ public class reservation {
         this.reason = reason;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
     @Override
     public String toString() {
         return "reservation{" +
