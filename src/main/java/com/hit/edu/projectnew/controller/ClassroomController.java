@@ -139,15 +139,22 @@ public class ClassroomController {
         }
 
         try {
-            if (classroomInfo.containsKey("content") && classroomInfo.get("content")!="") {
-                existingClassroom.setContent(Integer.parseInt(classroomInfo.get("content")));
+            if (classroomInfo.containsKey("content")) {
+                String contentValue = classroomInfo.get("content");
+                if (contentValue != null && !contentValue.isEmpty()) {
+                    existingClassroom.setCampus(Integer.parseInt(contentValue));
+                }
             }
             if (classroomInfo.containsKey("building") && classroomInfo.get("building")!="") {
                 existingClassroom.setBuilding(classroomInfo.get("building"));
             }
-            if (classroomInfo.containsKey("campus") && classroomInfo.get("campus")!="") {
-                existingClassroom.setCampus(Integer.parseInt(classroomInfo.get("campus")));
+            if (classroomInfo.containsKey("campus")) {
+                String campusValue = classroomInfo.get("campus");
+                if (campusValue != null && !campusValue.isEmpty()) {
+                    existingClassroom.setCampus(Integer.parseInt(campusValue));
+                }
             }
+
             if (classroomInfo.containsKey("equipment") && classroomInfo.get("equipment")!="") {
                 existingClassroom.setEquipment(classroomInfo.get("equipment"));
             }
