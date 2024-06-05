@@ -9,9 +9,14 @@ import java.util.List;
 @Mapper
 public interface ClassroomMapper {
 //    查询全部内容
-    @Select("select * from classroom")
-    public List<classroom> list();
+//    @Select("select * from classroom")
+//    public List<classroom> list();
 
-    @Select("select * from classsroom where CID=")
-    public List<classroom> list(String CID);
+
+//    @Select("SELECT * FROM classroom")
+//    List<classroom> findAllClassrooms();
+//
+//    @Insert("INSERT INTO classroom (name, capacity) VALUES (#{name}, #{capacity})")
+//    @Options(useGeneratedKeys = true, keyProperty = "cid")
+//    void addClassroom(classroom classroom);
 }
