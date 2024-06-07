@@ -34,25 +34,8 @@ public class ReservationController {
         String reason = reservationInfo.get("reason");
         Integer type = Integer.parseInt(reservationInfo.get("type"));
         String dateString = reservationInfo.get("dateTime"); // 假设前端传递的日期字段名为 "date"
-//        Date dateTime = Date.valueOf(dateString);
         LocalDate dateTime = LocalDate.parse(dateString);
         Integer checkStatus = 0;
-        System.out.println(dateString);
-        System.out.println(dateTime);
-        // 获取当前日期的Timestamp
-//        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-//        // 获取七天后的日期的Timestamp
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(currentTimestamp);
-//        calendar.add(Calendar.DAY_OF_YEAR, 7);
-//        Timestamp sevenDaysLaterTimestamp = new Timestamp(calendar.getTimeInMillis());
-//
-//        // 检查预约时间是否在当前时间之后且在七天内
-//        if (dateTime.before(currentTimestamp) || dateTime.after(sevenDaysLaterTimestamp)) {
-//            response.put("success", false);
-//            response.put("message", "Reservation time must be after the current time and within seven days.");
-//            return response;
-//        }
 
         // 获取当前日期和时间
         LocalDateTime currentDateTime = LocalDateTime.now();
