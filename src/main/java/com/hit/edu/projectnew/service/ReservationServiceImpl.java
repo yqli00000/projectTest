@@ -18,7 +18,13 @@ public class ReservationServiceImpl implements ReservationService{
     public void copyTypeToOccuStatus(checklist checklist) {
         reservationMapper.copyTypeToOccuStatus(checklist);
     }
-    public List<reservation> getAllReservations() {
-        return reservationMapper.getAllReservations();
+    public List<reservation> getNoReservations() {
+        return reservationMapper.getNoReservations();
     }
+
+    @Override
+    public List<reservation> getYesReservations() {
+        return  reservationMapper.getYesReservations();
+    }
+
 }

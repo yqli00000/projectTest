@@ -141,7 +141,7 @@ public class ClassroomController {
         try {
             if (classroomInfo.containsKey("content")) {
                 String contentValue = classroomInfo.get("content");
-                if (contentValue != null && !contentValue.isEmpty()) {
+                if (!contentValue.isEmpty()) {
                     existingClassroom.setCampus(Integer.parseInt(contentValue));
                 }
             }
@@ -150,7 +150,7 @@ public class ClassroomController {
             }
             if (classroomInfo.containsKey("campus")) {
                 String campusValue = classroomInfo.get("campus");
-                if (campusValue != null && !campusValue.isEmpty()) {
+                if (!campusValue.isEmpty()) {
                     existingClassroom.setCampus(Integer.parseInt(campusValue));
                 }
             }

@@ -70,19 +70,44 @@ public interface ClassroomMapper {
     class ClassroomSqlProvider {
         public String selectByConditions(Map<String, Object> conditions) {
             return new SQL() {{
-                SELECT("*");
-                FROM("classroom");
+//                SELECT("*");
+//                FROM("classroom");
+//                if (conditions.get("CID") != null) {
+//                    WHERE("CID = #{CID}");
+//                }
+//                if (conditions.get("content") != null) {
+//                    WHERE("content = #{content}");
+//                }
+//                if (conditions.get("building") != null) {
+//                    WHERE("building = #{building}");
+//                }
+//                if (conditions.get("campus") != null) {
+//                    WHERE("campus = #{campus}");
+//                }
+                SELECT("c.*"); // Assuming you want all fields from classroom
+                FROM("classroom c");
+                LEFT_OUTER_JOIN("reservation r ON c.CID = r.CID");
+
                 if (conditions.get("CID") != null) {
-                    WHERE("CID = #{CID}");
+                    WHERE("c.CID = #{CID}");
                 }
                 if (conditions.get("content") != null) {
-                    WHERE("content = #{content}");
+                    WHERE("c.content = #{content}");
                 }
                 if (conditions.get("building") != null) {
-                    WHERE("building = #{building}");
+                    WHERE("c.building = #{building}");
                 }
                 if (conditions.get("campus") != null) {
-                    WHERE("campus = #{campus}");
+                    WHERE("c.campus = #{campus}");
+                }
+                if (conditions.get("occuTime") != null) {
+                    WHERE("r.occuTime = #{occuTime}");
+                }
+                if (conditions.get("dateTime") != null) {
+                    WHERE("r.dateTime = #{dateTime}");
+                }
+                if (conditions.get("occuStatus") != null) {
+                    WHERE("r.occuStatus = #{occuStatus}");
                 }
             }}.toString();
         }

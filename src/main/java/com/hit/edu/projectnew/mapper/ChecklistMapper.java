@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Update;
 
 public interface ChecklistMapper {
-    @Insert("INSERT INTO checklist (CID, occuTime,checkStatus) VALUES (#{CID}, #{occuTime}, #{checkStatus})")
+    @Insert("INSERT INTO checklist (CID, occuTime,checkStatus,dateTime) VALUES (#{CID}, #{occuTime}, #{checkStatus}, #{dateTime})")
     void insertChecklist(checklist checklist);
 
     @Update("UPDATE checklist SET checkStatus=#{checkStatus} WHERE CID=#{CID} and occuTime=#{occuTime}")

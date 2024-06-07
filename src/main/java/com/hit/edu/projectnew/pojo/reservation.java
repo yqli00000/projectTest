@@ -2,6 +2,8 @@ package com.hit.edu.projectnew.pojo;
 
 import org.springframework.data.relational.core.sql.In;
 
+import java.util.Date;
+
 public class reservation {
     private Integer CID;
     private Integer occuStatus;
@@ -10,18 +12,28 @@ public class reservation {
     private String reason;
 
     private Integer type;
+    private Date dateTime;
     public reservation() {
     }
 
-
-    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type) {
+    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type, Date dateTime) {
         this.CID = CID;
         this.occuStatus = occuStatus;
         this.occuTime = occuTime;
         this.reservations = reservations;
         this.reason = reason;
         this.type = type;
+        this.dateTime = dateTime;
     }
+
+//    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type) {
+//        this.CID = CID;
+//        this.occuStatus = occuStatus;
+//        this.occuTime = occuTime;
+//        this.reservations = reservations;
+//        this.reason = reason;
+//        this.type = type;
+//    }
 
     public Integer getCID() {
         return CID;
@@ -70,6 +82,15 @@ public class reservation {
     public void setType(Integer type) {
         this.type = type;
     }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
     @Override
     public String toString() {
         return "reservation{" +
@@ -78,6 +99,8 @@ public class reservation {
                 ", occuTime=" + occuTime +
                 ", reservations='" + reservations + '\'' +
                 ", reason='" + reason + '\'' +
+                ", type=" + type +
+                ", dateTime=" + dateTime +
                 '}';
     }
 }
