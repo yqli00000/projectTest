@@ -8,14 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.sql.Date;
-//import java.util.Date;
-import java.sql.Timestamp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,10 +66,6 @@ public class ReservationController {
             return response;
         }
 
-        System.out.println(dateString);
-        System.out.println(dateTime);
-
-
         reservation reservation = new reservation();
         checklist checklist = new checklist();
 
@@ -89,6 +81,7 @@ public class ReservationController {
         checklist.setOccuTime(occuTime);
         checklist.setCheckStatus(checkStatus);
         checklist.setDateTime(dateTime);
+        checklist.setReservations(reservations);
 
         try {
             reservationService.addReservation(reservation);
@@ -111,14 +104,16 @@ public class ReservationController {
             Integer CID = Integer.parseInt(checklistInfo.get("CID"));
             Integer occuTime = Integer.parseInt(checklistInfo.get("occuTime"));
             Integer checkStatus = Integer.parseInt(checklistInfo.get("checkStatus"));
+            String reservations = checklistInfo.get("reservations");
             String dateString = checklistInfo.get("dateTime"); // 假设前端传递的日期字段名为 "date"
-            Date dateTime = Date.valueOf(dateString);
+            LocalDate dateTime = LocalDate.parse(dateString);
 
             checklist checklist = new checklist();
             checklist.setCID(CID);
             checklist.setOccuTime(occuTime);
             checklist.setCheckStatus(checkStatus);
             checklist.setDateTime(dateTime);
+            checklist.setReservations(reservations);
 
             checklistService.updateChecklist(checklist);
 //            审核通过
@@ -159,4 +154,32 @@ public class ReservationController {
         }
         return response;
     }
+    // 新的端点，用于获取特定日期和教室的预约情况
+    @GetMapping("/preReserveClassroom")
+    public Map<String, Object> getReservationsByDateAndCID(@RequestParam String dateTime, @RequestParam Integer CID) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            LocalDate reservationDate = LocalDate.parse(dateTime);
+            List<reservation> reservations = reservationService.getReservationsByDateAndCID(reservationDate, CID);
+
+            // 初始化时间段的状态
+            Map<Integer, Integer> timeSlots = new HashMap<>();
+            for (int i = 1; i <= 12; i++) {
+                timeSlots.put(i, 0); // 默认所有时间段均未预约
+            }
+
+            // 更新被预约的时间段状态
+            for (reservation res : reservations) {
+                timeSlots.put(res.getOccuTime(), 1);
+            }
+
+            response.put("success", true);
+            response.put("timeSlots", timeSlots);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Failed to fetch reservations: " + e.getMessage());
+        }
+        return response;
+    }
+
 }

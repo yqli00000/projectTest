@@ -2,6 +2,7 @@ package com.hit.edu.projectnew.pojo;
 
 import org.springframework.data.relational.core.sql.In;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class reservation {
@@ -12,11 +13,11 @@ public class reservation {
     private String reason;
 
     private Integer type;
-    private Date dateTime;
+    private LocalDate dateTime;
     public reservation() {
     }
 
-    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type, Date dateTime) {
+    public reservation(Integer CID, Integer occuStatus, Integer occuTime, String reservations, String reason, Integer type, LocalDate dateTime) {
         this.CID = CID;
         this.occuStatus = occuStatus;
         this.occuTime = occuTime;
@@ -83,11 +84,11 @@ public class reservation {
         this.type = type;
     }
 
-    public Date getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 
