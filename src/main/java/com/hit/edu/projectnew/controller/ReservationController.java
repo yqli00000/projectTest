@@ -4,14 +4,14 @@ import com.hit.edu.projectnew.pojo.checklist;
 import com.hit.edu.projectnew.pojo.reservation;
 import com.hit.edu.projectnew.service.ChecklistService;
 import com.hit.edu.projectnew.service.ReservationService;
+import com.hit.edu.projectnew.service.StudentService;
+import com.hit.edu.projectnew.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,12 @@ public class ReservationController {
     private ReservationService reservationService;
     @Autowired
     private ChecklistService checklistService;
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @RequestMapping("/reserveClassroom")
     @PostMapping
