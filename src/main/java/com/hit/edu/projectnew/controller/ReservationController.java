@@ -43,6 +43,15 @@ public class ReservationController {
         LocalDate dateTime = LocalDate.parse(dateString);
         Integer checkStatus = 0;
 
+        // 检查账号是否在学生表或教师表中
+        boolean isStudent = studentService.isStudent(reservations);
+        boolean isTeacher = teacherService.isTeacher(reservations);
+        if (!isStudent && !isTeacher) {
+            response.put("success", false);
+            response.put("message", "Account not found in student or teacher records.");
+            return response;
+        }
+
         // 获取当前日期和时间
         LocalDateTime currentDateTime = LocalDateTime.now();
         // 获取七天后的日期和时间
