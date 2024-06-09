@@ -57,7 +57,7 @@ public class ReservationController {
         // 获取七天后的日期和时间
         LocalDateTime sevenDaysLaterDateTime = currentDateTime.plusDays(7);
 // 检查预约时间是否在当前时间之后且在七天内
-        LocalDateTime reservationDateTime = dateTime.atTime(0, 0);
+        LocalDateTime reservationDateTime = dateTime.atTime(23, 59);
         if (reservationDateTime.isBefore(currentDateTime) || reservationDateTime.isAfter(sevenDaysLaterDateTime)) {
             response.put("success", false);
             response.put("message", "Reservation time must be after the current time and within seven days.");
